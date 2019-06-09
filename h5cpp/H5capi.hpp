@@ -214,12 +214,7 @@ inline std::ostream& operator<<(std::ostream& os, const h5::impl::array<T>& arr)
 	if( arr.rank )
 		for(int i=0;i<arr.rank; i++){
 			char sep = i != arr.rank - 1  ? ',' : '}';
-#ifdef _MSC_VER
-// Observe std::numeric_limits<hsize_t>::max is wrapped in ().
-			if( arr[i] < (std::numeric_limits<hsize_t>::max)() )
-#else
-			if (arr[i] < std::numeric_limits<hsize_t>::max())
-#endif // _MSC_VER
+			if( arr[i] < std::numeric_limits<hsize_t>::max() )
 				os << arr[i] << sep;
 			else
 				os << "inf" << sep;
